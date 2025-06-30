@@ -17,9 +17,9 @@ export const ThreeJSBackground = () => {
     renderer.setClearColor(0x000000, 0);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Crear geometría de partículas
+    // Crear geometría de partículas - reduced for subtle effect
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 1000;
+    const particlesCount = 500;
     const posArray = new Float32Array(particlesCount * 3);
 
     for (let i = 0; i < particlesCount * 3; i++) {
@@ -28,12 +28,12 @@ export const ThreeJSBackground = () => {
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-    // Material de partículas
+    // Material de partículas - vintage color palette
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.005,
-      color: 0x3b82f6,
+      size: 0.003,
+      color: 0xa94438, // seal red
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.3,
     });
 
     // Crear mesh de partículas
@@ -47,9 +47,9 @@ export const ThreeJSBackground = () => {
     const animate = () => {
       requestAnimationFrame(animate);
       
-      // Rotar partículas
-      particlesMesh.rotation.y += 0.001;
-      particlesMesh.rotation.x += 0.0005;
+      // Rotar partículas - slower for official document aesthetic
+      particlesMesh.rotation.y += 0.0005;
+      particlesMesh.rotation.x += 0.0002;
       
       renderer.render(scene, camera);
     };
